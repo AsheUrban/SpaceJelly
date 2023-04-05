@@ -7,6 +7,8 @@ The project will be created from scratch and it's easy to follow for beginners.
 
 
 
+
+
 ![App Screenshot](https://res.cloudinary.com/dqiyjy9ye/image/upload/v1668812920/random/saturn_nmf8hu.png)
 
 
