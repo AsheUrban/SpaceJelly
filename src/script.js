@@ -17,7 +17,7 @@ const camera = new THREE.PerspectiveCamera(
   100000 // Far clipping distance limit
 );
 camera.position.z = 3; // Pull the camera back a bit so you can see the object
-scene.add(camera);
+// scene.add(camera);
 
 // Lights
 const ambientLight = new THREE.AmbientLight(0xffffff, 2);  // Create a basic white universal light  // TODO: Change this to a fancier light!
@@ -64,8 +64,6 @@ const stars = new THREE.Points(particlesGeometry, particlesMaterial);
 scene.add(stars);
 
 const gltfLoader = new GLTFLoader(); // Create a loader
-let saturn;
-let sun;
 
 // make async loader
 const loadAsync = url => {
@@ -95,21 +93,6 @@ Promise.all( [loadAsync('./saturn/scene.gltf'), loadAsync('./sun/scene.gltf'), l
   scene.add(jf)
 })
 
-// let saturn;
-// // Import the planet saturn model // TODO Change to jelly fish
-// const gltfLoader = new GLTFLoader(); // Create a loader
-// gltfLoader.load("/scene.gltf", (gltf) => {
-//   console.log("success");
-
-//   saturn = gltf.scene.children[0];
-
-//   console.log("SATURN HERE", saturn);
-//   saturn.position.set(0, 0, 0);
-//   saturn.scale.set(.0001, .0001, .0001);
-
-//   scene.add(saturn);
-// });
-
 // Renderer
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas, // Canvas is the canvas element from html
@@ -119,29 +102,39 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Avoid pixelation on high res screens
 
+
+const mouse = new THREE.Vector2();
+const cameraPosition = new THREE.Vector3(50, 50, 50);
+
+function onMouseMove(event) {
+  mouse.x = (event.clientX / window.innerWidth) * 5 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 5 + 1;
+}
+
+function updateCameraPosition() {
+  cameraPosition.x += (mouse.x - cameraPosition.x) * 0.05;
+  cameraPosition.y += (-mouse.y - cameraPosition.y) * 0.05;
+
+  camera.position.copy(cameraPosition);
+  camera.lookAt(scene.position);
+}
+
+canvas.addEventListener("mousemove", onMouseMove);
 // Animate
 const animate = () => {
     // Update the controls
     controls.update();
 
     // Rotate the stars a bit, frame by frame
-    stars.rotation.y -= 0.001;
+    // stars.rotation.y -= 0.001;
 
-    //Check for null because models are loaded Async and this function isnt, this function will potentially fire before they are loaded.
-    if(saturn != null) 
-    {
-      saturn.rotation.z -= 0.001;
-    }
-    // if(sun != null)
-    // {
-    //   sun.rotation.z -= 0.001;
-    // }
+    updateCameraPosition();
 
     //Render the scene
     renderer.render(scene, camera);
 
     //Calls itself next frame, to repeat
-    window.requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
 };
 
 animate();
