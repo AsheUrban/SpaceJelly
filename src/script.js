@@ -101,7 +101,6 @@ const animate = () => {
       saturn.rotation.z -= 0.001;
     }
 
-
     //Render the scene
     renderer.render(scene, camera);
 
@@ -110,4 +109,3 @@ const animate = () => {
 };
 
 animate();
-
