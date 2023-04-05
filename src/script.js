@@ -31,10 +31,11 @@ scene.add(pointLight);
 // Controls
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true; // use to give a sense of weight
+controls.enabled = true;
 
 // Particles
 const particlesGeometry = new THREE.BufferGeometry(); // Geometry for stars
-const particlesCount = 100000; // particles to be created. Is equiv to 5000 * 3 (x,y,z vertices)
+const particlesCount = 15000; // particles to be created. Is equiv to 5000 * 3 (x,y,z vertices)
 const vertices = new Float32Array(particlesCount); // float of 32 bits (from buffer geo - vertices arr[x, y, z])
 
 // loop through all arr[x,y,z] w for loop (rand position)
@@ -103,7 +104,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Avoid pixelation on high res screens
 
 
-const mouse = new THREE.Vector2();
+const mouse = new THREE.Vector3();
 const cameraPosition = new THREE.Vector3(50, 50, 50);
 
 function onMouseMove(event) {
@@ -112,8 +113,8 @@ function onMouseMove(event) {
 }
 
 function updateCameraPosition() {
-  cameraPosition.x += (mouse.x - cameraPosition.x) * 0.05;
-  cameraPosition.y += (-mouse.y - cameraPosition.y) * 0.05;
+  cameraPosition.x += (mouse.x - cameraPosition.x) * 0.45;
+  cameraPosition.y += (-mouse.y - cameraPosition.y) * 0.45;
 
   camera.position.copy(cameraPosition);
   camera.lookAt(scene.position);
@@ -126,7 +127,7 @@ const animate = () => {
     controls.update();
 
     // Rotate the stars a bit, frame by frame
-    // stars.rotation.y -= 0.001;
+    stars.rotation.y -= 0.001;
 
     updateCameraPosition();
 
