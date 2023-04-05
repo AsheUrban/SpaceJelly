@@ -95,20 +95,6 @@ Promise.all( [loadAsync('./saturn/scene.gltf'), loadAsync('./sun/scene.gltf'), l
   scene.add(jf)
 })
 
-// let saturn;
-// // Import the planet saturn model // TODO Change to jelly fish
-// const gltfLoader = new GLTFLoader(); // Create a loader
-// gltfLoader.load("/scene.gltf", (gltf) => {
-//   console.log("success");
-
-//   saturn = gltf.scene.children[0];
-
-//   console.log("SATURN HERE", saturn);
-//   saturn.position.set(0, 0, 0);
-//   saturn.scale.set(.0001, .0001, .0001);
-
-//   scene.add(saturn);
-// });
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
