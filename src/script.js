@@ -34,7 +34,7 @@ controls.enableDamping = true; // use to give a sense of weight
 
 // Particles
 const particlesGeometry = new THREE.BufferGeometry(); // Geometry for stars
-const particlesCount = 100000; // particles to be created. Is equiv to 5000 * 3 (x,y,z vertices)
+const particlesCount = 15000; // particles to be created. Is equiv to 5000 * 3 (x,y,z vertices)
 const vertices = new Float32Array(particlesCount); // float of 32 bits (from buffer geo - vertices arr[x, y, z])
 
 // loop through all arr[x,y,z] w for loop (rand position)
@@ -49,7 +49,7 @@ particlesGeometry.setAttribute(
 
 // Texture (loader fxn)
 const textureLoader = new THREE.TextureLoader();
-const particleTexture = textureLoader.load("/textures/particles/bubble.png"); // TODO // Adds particle textures
+const particleTexture = textureLoader.load("/textures/particles/star.png"); // TODO // Adds particle textures
 
 // Material
 const particlesMaterial = new THREE.PointsMaterial({
@@ -63,57 +63,25 @@ const particlesMaterial = new THREE.PointsMaterial({
 const stars = new THREE.Points(particlesGeometry, particlesMaterial);
 scene.add(stars);
 
-const gltfLoader = new GLTFLoader(); // Create a loader
+
 let saturn;
-let sun;
+// Import the planet saturn model // TODO Change to jelly fish
+const gltfLoader = new GLTFLoader(); // Create a loader
+gltfLoader.load("/scene.gltf", (gltf) => {
+  console.log("success");
 
-// make async loader
-const loadAsync = url => {
-  return new Promise(resolve => {
-    gltfLoader.load(url, gltf => {
-      resolve(gltf)
-    })
-  })
-}
-Promise.all( [loadAsync('./saturn/scene.gltf'), loadAsync('./sun/scene.gltf'), loadAsync('./jellyfish/scene.gltf')] ).then(models => {
-  // get what you need from the models array
-  const saturn = models[0].scene.children[0]
-    saturn.position.set(0, 0, 0);
-    saturn.scale.set(0.001, 0.001, 0.001);
-  const sun = models[1].scene.children[0]
-    sun.position.set(-15, 0, 0);
-    sun.scale.set(0.1, 0.1, 0.1);
-  const jf = models[2].scene.children[0]
-    jf.position.set(5, 0, 0);
-    jf.scale.set(0.01, 0.01, 0.01);
+  saturn = gltf.scene.children[0];
 
-    console.log("saturn", saturn);
-    console.log("sun", sun);
-  // add both models to the scene
-  scene.add(saturn)
-  scene.add(sun)
-  scene.add(jf)
-})
+  console.log("SATURN HERE", saturn);
+  saturn.position.set(0, 0, 0);
+  saturn.scale.set(.0001, .0001, .0001);
 
-// let saturn;
-// // Import the planet saturn model // TODO Change to jelly fish
-// const gltfLoader = new GLTFLoader(); // Create a loader
-// gltfLoader.load("/scene.gltf", (gltf) => {
-//   console.log("success");
-
-//   saturn = gltf.scene.children[0];
-
-//   console.log("SATURN HERE", saturn);
-//   saturn.position.set(0, 0, 0);
-//   saturn.scale.set(.0001, .0001, .0001);
-
-//   scene.add(saturn);
-// });
+  scene.add(saturn);
+});
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas, // Canvas is the canvas element from html
-  alpha: true
 });
 
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -132,10 +100,7 @@ const animate = () => {
     {
       saturn.rotation.z -= 0.001;
     }
-    // if(sun != null)
-    // {
-    //   sun.rotation.z -= 0.001;
-    // }
+
 
     //Render the scene
     renderer.render(scene, camera);
