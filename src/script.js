@@ -4,7 +4,6 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 // Texture
-
 const loader = new THREE.TextureLoader();
 const starMap = loader.load("./textures/particles/star.png");
 
@@ -15,13 +14,13 @@ const canvas = document.querySelector("canvas");
 const scene = new THREE.Scene();
 
 // Objects
-const geometry = new THREE.SphereGeometry(1, 0, 0);
+const geometry = new THREE.SphereGeometry(1.5, 50, 6);
 const starsGeometry = new THREE.BufferGeometry();
 const starsCount = 15000;
 const positionArray = new Float32Array(starsCount * 3);
 
 for (let i = 0; i < starsCount * 3; i++) {
-  positionArray[i] = (Math.random() - 0.5) * (Math.random() * 7) * (Math.random() * 1);
+  positionArray[i] = (Math.random() - 0.5) * (Math.random() * 25) * (Math.random() * 1);
 }
 
 starsGeometry.setAttribute(
@@ -30,15 +29,13 @@ starsGeometry.setAttribute(
 );
 
 // Materials
-
 const material = new THREE.PointsMaterial({
   size: 0.000008,
   // color: "orange", // Sphere Color
-
 });
 
 const starsMaterial = new THREE.PointsMaterial({
-  size: 0.008,
+  size: 0.05,
   map: starMap,
   transparent: true,
   color: "white", // Star color
@@ -50,29 +47,22 @@ let saturn;
 // Import the planet saturn model // TODO Change to jelly fish
 const gltfLoader = new GLTFLoader(); // Create a loader
 gltfLoader.load("/saturn/scene.gltf", (gltf) => {
-  console.log("success");
-
   saturn = gltf.scene.children[0];
-
-  console.log("SATURN HERE", saturn);
   saturn.position.set(0, 0, 0);
-  saturn.scale.set(.0001, .0001, .0001);
-
+  saturn.scale.set(.0004, .0004, .0004);
   scene.add(saturn);
 });
 
 // Mesh
 const sphere = new THREE.Points(geometry, material);
-
 const starsMesh = new THREE.Points(starsGeometry, starsMaterial);
-
 scene.add(sphere, starsMesh);
 
 // Lights
-const pointLight = new THREE.PointLight(0xffffff, 4);
+const pointLight = new THREE.PointLight(0xffffff, 2.5);
 pointLight.position.x = 2;
 pointLight.position.y = 3;
-pointLight.position.z = 100;
+pointLight.position.z = 4;
 scene.add(pointLight);
 
 //Sizes
@@ -93,8 +83,6 @@ window.addEventListener("resize", () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
-// Camera
-
 // Base Camera
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -103,7 +91,7 @@ const camera = new THREE.PerspectiveCamera(
   100
 );
 camera.position.x = 0;
-camera.position.y = 0;
+camera.position.y = 1.5;
 camera.position.z = 2;
 scene.add(camera);
 
@@ -120,7 +108,6 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 // renderer.setClearColor(new THREE.Color("#8c8c8c"), 0.7); // background color
 
 // Mouse Movement
-
 document.addEventListener("mousemove", animateStars);
 let mouseX = 0;
 let mouseY = 0;
@@ -132,10 +119,9 @@ function animateStars(event) {
 }
 
 // Animate
-
 const clock = new THREE.Clock();
 
-const tick = () => {
+const animate = () => {
   const elapsedTime = clock.getElapsedTime();
 
   // Update objects
@@ -153,8 +139,8 @@ const tick = () => {
   // Render
   renderer.render(scene, camera);
 
-  // Call tick again on the frame
-  window.requestAnimationFrame(tick);
+  // Call animate again on the frame
+  window.requestAnimationFrame(animate);
 };
 
-tick();
+animate();
