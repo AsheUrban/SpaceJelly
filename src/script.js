@@ -67,7 +67,7 @@ scene.add(stars);
 let saturn;
 // Import the planet saturn model // TODO Change to jelly fish
 const gltfLoader = new GLTFLoader(); // Create a loader
-gltfLoader.load("/scene.gltf", (gltf) => {
+gltfLoader.load("/saturn/scene.gltf", (gltf) => {
   console.log("success");
 
   saturn = gltf.scene.children[0];
