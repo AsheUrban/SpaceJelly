@@ -3,6 +3,4 @@
 node_modules/
 jspm_packages/
 dist/
-static/saturn/scene.bin
-static/saturn/scene.gltf
 
