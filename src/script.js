@@ -70,16 +70,6 @@ gltfLoader.load('./jellyfish/scene.gltf', gltf => {
   scene.add(jellyfish);
 });
 
-// Multiply models
-// const numJellies = 3; // The number of Saturns you want to create
-// const jellies = []; // An array to hold the Saturn objects
-
-// for (let i = 0; i < numJellies; i++) {
-//   const newJelly = jellyfish.clone(); // Clone the original Saturn object
-//   newJelly.position.set(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5); // Set a random position for the new Saturn
-//   jellies.push(newJelly); // Add the new Saturn to the array
-//   scene.add(newJelly); // Add the new Saturn to the scene
-// }
 
 // Mesh
 const sphere = new THREE.Points(geometry, material);
