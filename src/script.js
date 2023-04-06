@@ -4,7 +4,6 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 // Texture
-
 const loader = new THREE.TextureLoader();
 const starMap = loader.load("./textures/particles/star.png");
 
@@ -15,7 +14,7 @@ const canvas = document.querySelector("canvas");
 const scene = new THREE.Scene();
 
 // Objects
-const geometry = new THREE.SphereGeometry(1, 0, 0);
+const geometry = new THREE.SphereGeometry(0.5, 40, 4);
 const starsGeometry = new THREE.BufferGeometry();
 const starsCount = 1500;
 const positionArray = new Float32Array(starsCount * 3);
@@ -30,11 +29,9 @@ starsGeometry.setAttribute(
 );
 
 // Materials
-
 const material = new THREE.PointsMaterial({
   size: 0.00008,
-  // color: "orange", // Sphere Color
-
+  color: "#FF5733", // Sphere Color
 });
 
 const starsMaterial = new THREE.PointsMaterial({
@@ -70,7 +67,6 @@ gltfLoader.load('./jellyfish/scene.gltf', gltf => {
   scene.add(jellyfish);
 });
 
-
 // Mesh
 const sphere = new THREE.Points(geometry, material);
 
@@ -98,15 +94,13 @@ window.addEventListener("resize", () => {
   // update sizes
   sizes.width = window.innerWidth;
   sizes.height = window.innerHeight;
-  // update camer
+  // update camera
   camera.aspect = sizes.width / sizes.height;
   camera.updateProjectionMatrix();
   // update renderer
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
-
-// Camera
 
 // Base Camera
 const camera = new THREE.PerspectiveCamera(
@@ -134,23 +128,19 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 // renderer.setClearColor(new THREE.Color("#8c8c8c"), 0.7); // background color
 
 // Mouse Movement
-
 document.addEventListener("mousemove", animateStars);
 let mouseX = 0;
 let mouseY = 0;
 
 function animateStars(event) {
-
   mouseY = event.clientY;
   mouseX = event.clientX;
 }
 
 // Animate
-
-
 const clock = new THREE.Clock();
 
-const tick = () => {
+const animate = () => {
   const elapsedTime = clock.getElapsedTime();
 
   if(saturn != null){ 
@@ -164,7 +154,7 @@ const tick = () => {
 
   if(jellyfish != null){
     jellyfish.rotation.z = -1 * elapsedTime;
-    jellyfish.rotation.y = (Math.PI / -2) * (0.64 * elapsedTime);
+    jellyfish.rotation.y = (Math.PI / -2) * (0.635 * elapsedTime);
     jellyfish.rotation.x = 0;
     jellyfish.position.set(
     Math.cos(elapsedTime) * 1.5, 0, Math.sin(elapsedTime) * 1.5
@@ -180,15 +170,14 @@ const tick = () => {
     starsMesh.rotation.y = mouseY * (elapsedTime * 0.0002);
   }
 
-
   // Update Orbital Controls
   controls.update();
 
   // Render
   renderer.render(scene, camera);
 
-  // Call tick again on the frame
-  window.requestAnimationFrame(tick);
+  // Call animate again on the frame
+  window.requestAnimationFrame(animate);
 };
 
-tick();
+animate();
