@@ -1,4 +1,4 @@
-# _The Event Handlers_
+# _SpaceJelly_
 
 #### By _Ashe Urban, Jackson Levine, Jacob Maier, Vera Weikel, and Mesha Devan_
 
