@@ -14,7 +14,7 @@
 
 ## Description
 
-_Following along with Emilian Kasemi's tutorial, we built an interactive space environment using 3js._
+_Following along with Emilian Kasemi's tutorial, Three.js Particles Tutorial: Create the Stars and the Rings of Saturn, we built an interactive space environment using 3js._
 
 _Tutorial Link:_ https://youtu.be/_RASm_aOfrE
 
