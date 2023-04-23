@@ -6,7 +6,7 @@
 
 ## Technologies Used
 
-- _3js_
+- _Three.js_
 - _JavaScript_
 - _HTML_
 - _CSS_
