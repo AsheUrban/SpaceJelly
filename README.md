@@ -1,23 +1,35 @@
+# _The Event Handlers_
 
-## Three.js Particles Tutorial
+#### By _Ashe Urban, Jackson Levine, Jacob Maier, Vera Weikel, and Mesha Devan_
 
-I made this 2.5 hours long tutorial on particles in Three.js. We'll create the stars effect, and then we'll add the 3D model of the planet Saturn to complete the scene.
-The project will be created from scratch and it's easy to follow for beginners. 
+#### 
 
+## Technologies Used
 
+- _3js_
+- _JavaScript_
+- _HTML_
+- _CSS_
+- _Webpack_
 
+## Description
 
+_Following along with Emilian Kasemi's tutorial, we built an interactive space environment using 3js._
 
+_Tutorial Link:_ https://youtu.be/_RASm_aOfrE
 
-![App Screenshot](https://res.cloudinary.com/dqiyjy9ye/image/upload/v1668812920/random/saturn_nmf8hu.png)
+## Setup/Installation Requirements
 
+- _Clone or download to your local repository_
+- _run npm install_
+- _npm run start to build and launch server_
 
-## YouTube Video
+## Known Bugs
 
-[Click here!](https://youtu.be/_RASm_aOfrE)
+- _None_
 
-## Authors
+## License
 
-- [Emilian Kasemi](https://www.github.com/theringsofsaturn)
+_MIT_
 
-DOWNLOAD LINK FOR MODEL (PUT .gltf and .bin {ignore textures} IN THE ./static FOLDER) https://drive.google.com/file/d/1myP0a8W2dkGzGyRsGf3Les0iEhundW0I/view?usp=sharing 
+Copyright (c) _2023_ _Ashe Urban, Jacob Maier, Jackson Levine, Vera Weikel, and Mesha Devan_
